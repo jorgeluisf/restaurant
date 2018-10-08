@@ -9,6 +9,8 @@ import { RecipesDetailComponent } from './components/recipes/recipes-detail/reci
 import { RecipesListComponent } from './components/recipes/recipes-list/recipes-list.component';
 import { ShoppingEditComponent } from './components/shopping-list/shopping-edit/shopping-edit.component';
 import { ItemComponent } from './components/recipes/recipes-list/item/item.component';
+import { IngredientsService } from './services/ingredients.service';
+
 
 
 @NgModule({
@@ -25,7 +27,9 @@ import { ItemComponent } from './components/recipes/recipes-list/item/item.compo
   imports: [
     BrowserModule
   ],
-  providers: [],
+  providers: [
+    IngredientsService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
