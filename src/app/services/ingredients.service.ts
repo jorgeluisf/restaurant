@@ -1,20 +1,33 @@
 import { Ingridients } from "../shared/ingridients.model";
+import { EventEmitter } from '@angular/core';
 
 export class IngredientsService{
-  addIngridents(newIngredient: Ingridients): any {
-    throw new Error("Method not implemented.");
-  }
-    
-  ingridients:Ingridients[] = [
-    new Ingridients('Tomatos', 5),
-    new Ingridients('Apples', 7),
-    new Ingridients('Lemons', 7)
-  ];
+    ingredientsChanged = new EventEmitter<Ingridients[]>();
+     private ingredients : Ingridients []= [
+        new Ingridients('Tomatoes', 5),
+        new Ingridients('Apples', 3),
+      ];
+      getIngredients(){
+      
+        return this.ingredients.slice();
+    }     
+      addIngredient(ingredient: Ingridients){
+          this.ingredients.push(ingredient);
+          this.ingredientsChanged.emit(this.ingredients.slice());    
+          }
+          //se guarda el arreglo en el for y en la constante i
+          addIngredients(auxIngredients : Ingridients []){
+           auxIngredients.forEach(Ingridients => {
+             const foundIngridient = this.ingredients.find(foundIngridient =>
+              foundIngridient.name === Ingridients.name
+              );
+              if (!foundIngridient) {
+                this.ingredients.push(Ingridients);
+              }else{
+                foundIngridient.amount += Ingridients.amount;
+              }
+           });
 
-  getIngredients(){
-      return this.ingridients.slice();
-  }
-  addIngredient(ingridient: Ingridients){
-      this.ingridients.push(ingridient);
-  }
+          }
 }
+

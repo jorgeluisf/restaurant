@@ -10,6 +10,7 @@ import { RecipesListComponent } from './components/recipes/recipes-list/recipes-
 import { ShoppingEditComponent } from './components/shopping-list/shopping-edit/shopping-edit.component';
 import { ItemComponent } from './components/recipes/recipes-list/item/item.component';
 import { IngredientsService } from './services/ingredients.service';
+import { AppRoutingModule } from './app-routing.module';
 
 
 
@@ -25,7 +26,8 @@ import { IngredientsService } from './services/ingredients.service';
     ItemComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    AppRoutingModule
   ],
   providers: [
     IngredientsService
