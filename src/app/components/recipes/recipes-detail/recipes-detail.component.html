@@ -3,13 +3,11 @@
     <img src="" alt="" class="img-fluid">
   </div>
 </div>
-
 <div class="row">
   <div class="col-12">
-    <h1>{{ recipe.name }}</h1>
+    <h1>{{recipe.name}}</h1>
   </div>
 </div>
-
 <div class="row">
   <div class="col-12">
     <div class="btn-group">
@@ -17,20 +15,18 @@
         Manage Recipe
       </button>
       <div class="dropdown-menu">
-        <a style="cursor:pointer" class="dropdown-item" (click)="onAddToShoppingList()">To Shopping</a>
-        <a style="cursor: pointe;" class="dropdown-item">Edit Recipé</a>
-        <a style="cursor: pointer" class="dropdown-item">Delete Recipe</a>
+        <a style="cursor: pointer;" class="dropdown-item" (click)="onAddToShoppingList()">To shopping</a>
+        <a style="cursor: pointer;" class="dropdown-item" (click)= onEditRecipe()>Edit Recipe</a>
+        <a style="cursor: pointer;" class="dropdown-item">Delete Recipe</a>
       </div>
     </div>
   </div>
 </div>
-
 <div class="row">
   <div class="col-12">
-    {{ recipe.description }}
+  {{recipe.description}}
   </div>
 </div>
-
 <div class="row">
   <div class="col-12">
     <ul class="list-group">
@@ -38,6 +34,5 @@
         {{ingredient.name}} ({{ingredient.amount}})
       </li>
     </ul>
-    
   </div>
 </div>

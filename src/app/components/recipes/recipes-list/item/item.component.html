@@ -1,21 +1,10 @@
-<a 
-class="list-group-item list-group-item-action clearfix"
-style="cursor: pointer;"
-(click)="onSelected()"
->
-
+<a style="cursor: pointer;" class="list-group-item list-group-item-action clearfix" routerLinkActive="active"
+  [routerLink] = "[index]">
   <div class="float-left">
-    <h4>{{ recipe.name }}</h4>
-    <p>{{ recipe.description }}</p>
+    <h4>{{recipe.name}}</h4>
+    <p>{{recipe.description}}</p>
   </div>
-
-  <span class="float-right">
-    <img 
-      [src]="recipe.imagePath" 
-      [alt]="recipe.imagePath"
-      class="img-fluid"
-      width="80px"
-    >
+  <span class="float-rigth">
+    <img src="{{recipe.imagePath}}" alt="{{recipe.imagePath}}" class="img-fluid" width="80px">
   </span>
-
 </a>

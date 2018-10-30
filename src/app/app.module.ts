@@ -8,9 +8,15 @@ import { ShoppingListComponent } from './components/shopping-list/shopping-list.
 import { RecipesDetailComponent } from './components/recipes/recipes-detail/recipes-detail.component';
 import { RecipesListComponent } from './components/recipes/recipes-list/recipes-list.component';
 import { ShoppingEditComponent } from './components/shopping-list/shopping-edit/shopping-edit.component';
-import { ItemComponent } from './components/recipes/recipes-list/item/item.component';
 import { IngredientsService } from './services/ingredients.service';
 import { AppRoutingModule } from './app-routing.module';
+
+import { RecipesItemComponent } from './components/recipes/recipes-list/item/item.component';
+import { RecipeStartComponent } from './components/recipes/recipe-start/recipe-start.component';
+import { RecipeEditComponent } from './components/recipes/recipe-edit/recipe-edit.component';
+import {FormsModule} from '@angular/forms';
+
+
 
 
 
@@ -23,11 +29,14 @@ import { AppRoutingModule } from './app-routing.module';
     RecipesDetailComponent,
     RecipesListComponent,
     ShoppingEditComponent,
-    ItemComponent
+    RecipesItemComponent,
+    RecipeStartComponent,
+    RecipeEditComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [
     IngredientsService
