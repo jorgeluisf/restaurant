@@ -1,22 +1,23 @@
 import { Recipe } from "../components/recipes/recipe.model";
-import { EventEmitter, Injectable } from "@angular/core";
-import { Ingridients } from "../shared/ingridients.model";
+import { Injectable } from "@angular/core";
+import { Ingredients } from '../shared/ingredients.model';
 import { IngredientsService } from "./ingredients.service";
+import { Subject } from "rxjs";
 
 @Injectable()
-
 export class RecipeService {
 
-  recipeSelected = new EventEmitter<Recipe>();
+  recipesChanged = new Subject<Recipe[]>();
+  // recipeSelected = new EventEmitter<Recipe>();
 
   private recipes: Recipe[] = [
     new Recipe(
-      'A test recipe',
-      'This is a simply test 1', 
-      'https://www.stockthehouse.com/wp-content/uploads/2018/06/pep-pizza.jpg',
+      'BIZCOCHO DE LECHE EVAPORADA',
+      'El bizcocho de leche evaporada es una clásica receta, ideal para compartir en una tarde de té. Se trata de un postre hecho con leche evaporada, en vez de...', 
+      'https://okdiario.com/img/2018/10/15/bizcocho-de-leche-evaporada-487x274.jpg',
       [
-        new Ingridients('Bread', 2),
-        new Ingridients('Chease', 4),
+        new Ingredients('Bread', 2),
+        new Ingredients('Chease', 4),
       ]
     ),
     new Recipe(
@@ -24,7 +25,7 @@ export class RecipeService {
       'This is a simply test 2', 
       'https://www.stockthehouse.com/wp-content/uploads/2018/06/pep-pizza.jpg',
       [
-        new Ingridients('Apple', 3)
+        new Ingredients('Apples', 3)
       ]
     ),
     new Recipe(
@@ -32,23 +33,35 @@ export class RecipeService {
       'This is a simply test 3', 
       'https://www.stockthehouse.com/wp-content/uploads/2018/06/pep-pizza.jpg',
       [
-        new Ingridients('Orange', 2),
-        new Ingridients('Salt', 2)
+        new Ingredients('Orange', 2),
+        new Ingredients('Salt', 2)
       ]
     )
   ];
-  constructor(private IngredientsService: IngredientsService){}
 
-  getRecipes(){
-    return this.recipes.slice();
+  constructor(private ingredientsService: IngredientsService) { }
+
+  getRecipes = (): Recipe[] => [...this.recipes];
+
+  getRecipe = (index: number) => this.recipes[index];
+
+  addIngredientsToShoppingList(ingredients: Ingredients[]) {
+    this.ingredientsService.addIngridients(ingredients);
   }
 
-  getRecipe(index: number){
-    return this.recipes[index];
+  addRecipe(recipe: Recipe) {
+    this.recipes.push(recipe);
+    this.recipesChanged.next([...this.recipes]);
   }
 
+  updateRecipe(index: number, recipe: Recipe) {
+    this.recipes[index] = recipe;
+    this.recipesChanged.next([...this.recipes]);
+  }
 
-addIngredientsToShoppingList(ingredients: Ingridients[]){
-  this.IngredientsService.addIngridients(ingredients);
-}
+  deleteRecipe(index: number) {
+    this.recipes.splice(index, 1);
+    this.recipesChanged.next([...this.recipes]);
+  }
+
 }

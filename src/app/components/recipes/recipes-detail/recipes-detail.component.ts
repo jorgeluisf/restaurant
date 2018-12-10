@@ -1,7 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { RecipeService } from '../../../services/recipes.service';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Recipe } from '../recipe.model';
-import { RecipeService } from 'src/app/services/recipes.service';
-import { Route, Router, ActivatedRoute, Params } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-recipes-detail',
@@ -9,27 +10,37 @@ import { Route, Router, ActivatedRoute, Params } from '@angular/router';
   styleUrls: ['./recipes-detail.component.css']
 })
 export class RecipesDetailComponent implements OnInit {
-
-  //@Input() recipe: Recipe;
-  recipe: Recipe;
-  id: number;
   
-  constructor(private recipeService: RecipeService, private route: ActivatedRoute, private router: Router) { }
+  id: number;
+  recipe: Recipe;
+  private subscription: Subscription;
+
+  constructor(private recipeService: RecipeService,
+    private route: ActivatedRoute,
+    private router: Router) {}
 
   ngOnInit() {
-    this.route.params
-      .subscribe((param: Params) => {
-      this.id = +param['id'];
-      this.recipe = this.recipeService.getRecipe(this.id);
-      });
+    this.subscription = this.route.params.subscribe((param: Params) => {
+      this.id = +param['id']
+      this.recipe = this.recipeService.getRecipe(this.id)
+    });
   }
 
-  onAddToShoppingList(){
-  this.recipeService.addIngredientsToShoppingList(this.recipe.ingredients);
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
-  onEditRecipe(){
-    this.router.navigate(['edit'], {relativeTo: this.route})
+  onAddToShoppingList({ ingredients }) {
+    this.recipeService.addIngredientsToShoppingList(ingredients);
+  }
+
+  onEditRecipe() {
+    this.router.navigate(['edit'], { relativeTo: this.route })
+  }
+
+  onDeleteRecipe() {
+    this.recipeService.deleteRecipe(this.id);
+    this.router.navigate(['../'], { relativeTo: this.route });
   }
 
 }

@@ -3,11 +3,13 @@
     <img src="" alt="" class="img-fluid">
   </div>
 </div>
+
 <div class="row">
   <div class="col-12">
-    <h1>{{recipe.name}}</h1>
+    <h1>{{ recipe.name }}</h1>
   </div>
 </div>
+
 <div class="row">
   <div class="col-12">
     <div class="btn-group">
@@ -15,24 +17,31 @@
         Manage Recipe
       </button>
       <div class="dropdown-menu">
-        <a style="cursor: pointer;" class="dropdown-item" (click)="onAddToShoppingList()">To shopping</a>
-        <a style="cursor: pointer;" class="dropdown-item" (click)= onEditRecipe()>Edit Recipe</a>
-        <a style="cursor: pointer;" class="dropdown-item">Delete Recipe</a>
+        <a (click)="onAddToShoppingList(recipe);" class="dropdown-item" style="cursor: pointer;">To Shopping List</a>
+        <a 
+          (click)="onEditRecipe();"
+        class="dropdown-item" style="cursor: pointer;">Edit Recipé</a>
+        <a (click)="onDeleteRecipe()" class="dropdown-item" style="cursor: pointer;">Delete Recipe</a>
       </div>
     </div>
   </div>
 </div>
+
 <div class="row">
   <div class="col-12">
-  {{recipe.description}}
+    {{ recipe.description }}
   </div>
 </div>
+
 <div class="row">
   <div class="col-12">
-    <ul class="list-group">
-      <li class="list-group-item" *ngFor="let ingredient of recipe.ingredients">
-        {{ingredient.name}} ({{ingredient.amount}})
-      </li>
-    </ul>
+  <ul class="list-group">
+    <li
+      *ngFor="let ingredient of recipe.ingredients" 
+      class="list-group-item"
+    >
+      {{ ingredient.name }} ({{ ingredient.amount }})
+    </li>
+  </ul>
   </div>
 </div>
